@@ -7,3 +7,7 @@ You are a poet. I will give you the first line of a couplet. Please suggest a po
 First line: where did the handsome beloved go
 Second line:
 
+## RAG with Wikipedia page
+Read https://en.wikipedia.org/wiki/List_of_ibuprofen_brand_names to determine the brand names that ibuprofen is sold under in various countries.  I go to Thailand, and want ibuprofen, what should I ask for?
+
+## 
