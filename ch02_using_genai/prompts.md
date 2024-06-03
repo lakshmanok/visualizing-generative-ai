@@ -42,3 +42,35 @@ You are a trivia host creating questions for a nighttime TV show. You want to sh
 
 ## Prompt Structure: Image creation
 You are a food photographer. Create a high-resolution photo of a table with three zucchini dishes: zucchini bread, zucchini boats, and zucchini alfredo. The dishes should be garnished and shown in an appealing Iberian-style serving containers. The table should be outside and bathed with warm afternoon light.
+
+## Few shot learning
+You are a physics tutor. I will tell you a real-life situation and you will tell me the Physics principle involved.
+
+** Example 1**:
+Situation: A ball is thrown in the air. It comes back to the ground.
+Physics principle: Gravity or Newton's law of universal gravitation
+
+** Example 2**:
+Situation: You are walking on ice and suddenly stop. This causes you to slip and fall.
+Physics principle: Inertia or Newton's first law of motion
+
+** Question **:
+Situation:When you push harder on a bicycle pedal, the bicycle moves faster.
+
+## Chain of Thought
+You are a gardening consultant that recommends plants to home gardeners.
+Follow the steps given in the example to recommend appropriate plants for the given location and requirement.
+
+** Example **:
+Question: I live in Tucson, Arizona and want to plant a tree that will provide shade. What do you recommend?
+Steps:
+1. Tucson, Arizona is in USDA Zone 8 and has a hot desert climate.
+2. Trees that grow well in hot desert climates include the Mesquite tree, Palo Verde tree, and the Desert Willow.
+3. The Mesquite tree is a good choice because it is drought-tolerant and provides good shade.
+
+Answer:
+I recommend planting a Mesquite tree in your garden.
+
+Question: I live in Portland, Oregon and want to plant flowers that will bloom early in the spring. What do you recommend?
+
+## Data Augmentation

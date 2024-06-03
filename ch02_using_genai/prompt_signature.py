@@ -36,10 +36,13 @@ class ReviewClassifier(dspy.Module):
 
     def forward(self, review):
         answer = self.prog(context=self.context, review=review)
+        # let's do some post-processing to convert the output into consistent case, array, etc.
         if "Sentiment: " in answer.sentiment:
             start = answer.sentiment.rindex("Sentiment: ") + len("Sentiment: ")
-            answer.sentiment = answer.sentiment[start:]
-        answer.topics = [x.strip() for x in answer.topics.split(",")]
+            answer.sentiment = answer.sentiment[start:].upper()
+        else:
+            answer.sentiment = answer.sentiment.upper()
+        answer.topics = [x.strip().upper() for x in answer.topics.split(",")]
         return answer
 
 

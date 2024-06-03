@@ -6,3 +6,6 @@ langchain-groq
 langchain-anthropic
 tiktoken
 dspy-ai[google-vertex-ai]
+google-generativeai
+pypdfium2
+
