@@ -1,5 +1,6 @@
 python-dotenv
 langchain
+langchain-community
 langchain-openai
 langchain-google-genai
 langchain-groq
@@ -8,4 +9,5 @@ tiktoken
 dspy-ai[google-vertex-ai]
 google-generativeai
 pypdfium2
+pypdf
 
