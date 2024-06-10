@@ -1,3 +1,5 @@
+# First part of chain. Goes from flyer -> list of items on sale
+
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.messages import HumanMessage
 from langchain.prompts.chat import ChatPromptTemplate
