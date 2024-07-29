@@ -4,7 +4,7 @@ import pypdfium2 as pdfium
 import tempfile
 import os
 
-load_dotenv("keys.env")
+load_dotenv("../keys.env")
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 model = genai.GenerativeModel(model_name="gemini-1.5-flash")
 

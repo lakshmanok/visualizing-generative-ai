@@ -13,7 +13,7 @@ import os, tempfile, io
 
 MAX_PAGES_OF_FLYER = 2  # to reduce token usage
 
-load_dotenv("keys.env")
+load_dotenv("../keys.env")
 
 model = ChatOpenAI(model="gpt-4o")
 # model = GoogleGenerativeAI(model="gemini-1.5-flash")

@@ -4,7 +4,7 @@ import dspy
 from dspy import teleprompt
 
 # Load key into the environment
-load_dotenv("keys.env")
+load_dotenv("../keys.env")
 
 # Control the creativity
 kwargs = {

@@ -8,7 +8,7 @@ from langchain_groq import ChatGroq
 from langchain_anthropic import ChatAnthropic
 
 # Load key into the environment
-load_dotenv("keys.env")
+load_dotenv("../keys.env")
 print("OPENAI_API_KEY:", os.getenv("OPENAI_API_KEY"))
 
 # let's create all 4 LLMs
