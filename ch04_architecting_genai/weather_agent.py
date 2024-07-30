@@ -27,11 +27,20 @@ gemini_config = {
     "seed": 25  # for caching
 }
 
-assistant = AssistantAgent(
-    "Gemini",
-    llm_config=gemini_config,
-    max_consecutive_auto_reply=3
-)
+openai_config = {
+    "config_list": [
+        {
+            "model": "gpt-4",
+            "api_key": os.environ.get("OPENAI_API_KEY")
+        }
+    ]
+}
+
+assistant = AssistantAgent("Assistant",
+                           llm_config=gemini_config,
+                           # llm_config=openai_config,
+                           max_consecutive_auto_reply=3)
+
 
 user_proxy = UserProxyAgent(
     "user_proxy",
@@ -68,28 +77,28 @@ In the question below, what latitude and longitude is the user asking about?
 Example:
   Question: What's the weather in Kalamazoo, Michigan?
   Step 1:   The user is asking about Kalamazoo, Michigan.
-  Step 2:   Use the geocoder tool to get the latitude and longitude of Kalmazoo, Michigan.
+  Step 2:   Call latlon_geocoder('Kalamazoo, Michigan') to get the latitude and longitude.
   Answer:   (42.2917, -85.5872)
 
 Question: 
 """
 
 
-def geocoder(location: str) -> (float, float):
+def latlon_geocoder(location: str) -> (float, float):
     geocode_result = gmaps.geocode(location)
     return (round(geocode_result[0]['geometry']['location']['lat'], 4),
             round(geocode_result[0]['geometry']['location']['lng'], 4))
 
 
 autogen.register_function(
-    geocoder,
+    latlon_geocoder,
     caller=assistant,  # The assistant agent can suggest calls to the geocoder.
     executor=user_proxy,  # The user proxy agent can execute the geocder calls.
-    name="geocoder",  # By default, the function name is used as the tool name.
+    name="latlon_geocoder",  # By default, the function name is used as the tool name.
     description="Finds the latitude and longitude of a location or landmark",  # A description of the tool.
 )
 
-print("Geolocation of Kalamazoo: ", geocoder('Kalamazoo, Michigan'))
+print("Geolocation of Kalamazoo: ", latlon_geocoder('Kalamazoo, Michigan'))
 response2 = user_proxy.initiate_chat(
     assistant, message=f"{SYSTEM_MESSAGE_2} Is it raining in Chicago?"
 )
@@ -102,7 +111,7 @@ Follow the steps in the example below to retrieve the weather information reques
 Example:
   Question: What's the weather in Kalamazoo, Michigan?
   Step 1:   The user is asking about Kalamazoo, Michigan.
-  Step 2:   Use the geocoder tool to get the latitude and longitude of Kalmazoo, Michigan.
+  Step 2:   Use the latlon_geocoder tool to get the latitude and longitude of Kalmazoo, Michigan.
   Step 3:   latitude, longitude is (42.2917, -85.5872)
   Step 4:   Use the get_weather_from_nws tool to get the weather from the National Weather Service at the latitude, longitude
   Step 5:   The detailed forecast for tonight reads 'Showers and thunderstorms before 8pm, then showers and thunderstorms likely. Some of the storms could produce heavy rain. Mostly cloudy. Low around 68, with temperatures rising to around 70 overnight. West southwest wind 5 to 8 mph. Chance of precipitation is 80%. New rainfall amounts between 1 and 2 inches possible.'
