@@ -5,40 +5,44 @@ import autogen
 import requests
 from autogen import AssistantAgent, UserProxyAgent
 
+# Choose one
+PROVIDER = "Gemini"
+# PROVIDER = "OpenAI"
+
+
 # Load key into the environment
 load_dotenv("../keys.env")
 
 gmaps = googlemaps.Client(key=os.environ.get("GOOGLE_API_KEY"))
 
-gemini_config = {
-    "config_list": [
-        {
-            "model": "gemini-1.5-flash",
-            "api_key": os.environ.get("GOOGLE_API_KEY"),
-            "api_type": "google"
-        }
-    ],
-    "safety_settings":  [
-        {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_ONLY_HIGH"},
-        {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_ONLY_HIGH"},
-        {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_ONLY_HIGH"},
-        {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_ONLY_HIGH"},
-    ],
-    "seed": 25  # for caching
-}
-
-openai_config = {
-    "config_list": [
-        {
-            "model": "gpt-4",
-            "api_key": os.environ.get("OPENAI_API_KEY")
-        }
-    ]
-}
+if PROVIDER == "Gemini":
+    llm_config = {
+        "config_list": [
+            {
+                "model": "gemini-1.5-flash",
+                "api_key": os.environ.get("GOOGLE_API_KEY"),
+                "api_type": "google"
+            }
+        ],
+        "safety_settings":  [
+            {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_ONLY_HIGH"},
+            {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_ONLY_HIGH"},
+            {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_ONLY_HIGH"},
+            {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_ONLY_HIGH"},
+        ],
+    }
+else:
+    openai_config = {
+        "config_list": [
+            {
+                "model": "gpt-4",
+                "api_key": os.environ.get("OPENAI_API_KEY")
+            }
+        ],
+    }
 
 assistant = AssistantAgent("Assistant",
-                           llm_config=gemini_config,
-                           # llm_config=openai_config,
+                           llm_config=llm_config,
                            max_consecutive_auto_reply=3)
 
 
@@ -53,7 +57,7 @@ user_proxy = UserProxyAgent(
 response0 = user_proxy.initiate_chat(
     assistant, message=f"Is it raining in Chicago?"
 )
-print(f"***MESSAGE 0****\n{response0}***************\n")
+print(f"***MESSAGE 0****\n{PROVIDER} {response0}***************\n")
 """
 
 SYSTEM_MESSAGE_1 = """
@@ -69,7 +73,7 @@ Question:
 response1 = user_proxy.initiate_chat(
     assistant, message=f"{SYSTEM_MESSAGE_1} Is it raining in Chicago?"
 )
-print(f"***MESSAGE 1****\n{response1}***************\n")
+print(f"***MESSAGE 1****\n{PROVIDER} {response1}***************\n")
 
 SYSTEM_MESSAGE_2 = """
 In the question below, what latitude and longitude is the user asking about? 
@@ -102,7 +106,7 @@ print("Geolocation of Kalamazoo: ", latlon_geocoder('Kalamazoo, Michigan'))
 response2 = user_proxy.initiate_chat(
     assistant, message=f"{SYSTEM_MESSAGE_2} Is it raining in Chicago?"
 )
-print(f"***MESSAGE 2****\n{response2}***************\n")
+print(f"***MESSAGE 2****\n{PROVIDER} {response2}***************\n")
 
 
 SYSTEM_MESSAGE_3 = """
@@ -158,7 +162,7 @@ print("Weather in Kalamazoo: ", get_weather_from_nws(42.2917, -85.5872))
 response3 = user_proxy.initiate_chat(
     assistant, message=f"{SYSTEM_MESSAGE_3} Is it raining in Chicago?"
 )
-print(f"***MESSAGE 3****\n{response2}***************\n")
+print(f"***MESSAGE 3****\n{PROVIDER} {response2}***************\n")
 
 
 
