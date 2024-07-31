@@ -6,3 +6,7 @@ langchain
 langchain-community
 langchain-openai
 langchain-google-genai
+langchainhub
+langchain-chroma
+chromadb
+
