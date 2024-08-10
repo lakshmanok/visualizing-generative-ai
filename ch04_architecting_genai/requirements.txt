@@ -9,4 +9,5 @@ langchain-google-genai
 langchainhub
 langchain-chroma
 chromadb
+flashrank
 
