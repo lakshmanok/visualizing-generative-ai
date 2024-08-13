@@ -3,3 +3,8 @@ vectordb
 names.db
 names.zip
 names_all_years.csv
+1grams_english.csv
+obscene.txt
+plot_code.py
+reddit_jokes.json
+stopwords-en.txt
