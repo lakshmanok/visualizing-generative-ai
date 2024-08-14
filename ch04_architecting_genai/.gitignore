@@ -10,3 +10,4 @@ reddit_jokes.json
 stopwords-en.txt
 finetuning_gemini.jsonl
 finetuning_openai.jsonl
+sonnets.txt
