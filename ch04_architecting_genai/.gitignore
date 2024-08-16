@@ -11,3 +11,5 @@ stopwords-en.txt
 finetuning_gemini.jsonl
 finetuning_openai.jsonl
 sonnets.txt
+reviews.json
+distill_train.jsonl
