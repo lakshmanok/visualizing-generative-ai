@@ -1,0 +1,13 @@
+pyautogen[gemini]
+googlemaps
+bs4
+langgraph
+langchain
+langchain-community
+langchain-openai
+langchain-google-genai
+langchainhub
+langchain-chroma
+chromadb
+flashrank
+
